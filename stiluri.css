@@ -107,6 +107,8 @@ img, video, iframe {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
   grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr;
+  justify-content: space-evenly;
+  gap: 5px;
 }
 
 /*itemele din grid*/
@@ -149,4 +151,37 @@ img, video, iframe {
 {
   grid-column: 1 / span 4;
   grid-row: 6 / span 1;
+}
+
+.navigatie {
+  display:flex;
+  align-items:center;
+  position: fixed;
+  width: max-content
+}
+
+li{
+  float: left;
+}
+
+li a {
+  display: block;
+  color: #FA6D0E;
+  text-align: center;
+  justify-self: auto;
+  padding: 16px;
+  text-decoration: none;
+}
+
+li a:hover {
+  background-color: #FA6D0E;
+  color: #333333;
+}
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #333333;
 }
