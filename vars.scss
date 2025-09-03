@@ -1,0 +1,61 @@
+/* ===== Variabile SASS + CSS (culori în CSS ca să poți schimba tema) ===== */
+$bars: 3;
+$w: 28px;            // lățime bară
+$h: 3px;             // înălțime bară
+$gap: 6px;           // spațiu vertical între bare
+$delay-step: 0.18s;  // decalaj între animații
+$radius: 10px;
+
+body {
+  --burger-color: #f5f5f5;   /* culoare implicită a barelor */
+  --burger-accent: #FA6D0E;  /* culoare în cadru intermediar/final */
+}
+
+/* ===== Containerul hamburger + poziționarea absolută a barelor ===== */
+.hamburger {
+  position: relative;
+  width: $w;
+  height: ($h * $bars) + ($gap * ($bars - 1)); /* încap 3 bare cu gap-uri */
+  cursor: pointer;
+  display: none; /* ascuns pe desktop – îl afișăm doar pe mobil */
+}
+
+/* Barele: dreptunghiuri poziționate absolut în container */
+.hamburger .bar {
+  position: absolute;       /* cerință: barele poziționate absolut în container */
+  left: 0;
+  width: 100%;
+  height: $h;
+  background: var(--burger-color); /* culoare inițială */
+  border-radius: $radius;
+  opacity: .85;
+}
+
+/* Generăm verticala + animația și delay-urile cu @for (bonus) */
+@for $i from 1 through $bars {
+  .hamburger .bar:nth-child(#{$i}) {
+    top: ($i - 1) * ($h + $gap);                  /* a câta bară e → poziție verticală */
+    animation: bar-pop-#{$i} 700ms ease both;     /* fiecare bară are animație proprie */
+    animation-delay: $i * $delay-step;            /* decalaj succesiv t */
+  }
+}
+
+/* ===== Keyframes: schimbăm culoare + transform + opacitate (minim 3 cadre) ===== */
+@for $i from 1 through $bars {
+  @keyframes bar-pop-#{$i} {
+    0%   { opacity: 0;   transform: translateY(-4px) scaleX(.75); background: var(--burger-color); }
+    50%  { opacity: .7;  transform: translateY(0)    scaleX(1.08); background: var(--burger-accent); }
+    100% { opacity: 1;   transform: translateY(0)    scaleX(1);    background: var(--burger-color); }
+  }
+}
+
+/* ===== Stare “deschis” – la bifarea checkbox-ului schimbăm vizual barele ===== */
+.nav-toggle:checked ~ .hamburger .bar {
+  background: var(--burger-accent); /* schimbare de culoare vizibilă când e deschis */
+  opacity: 1;
+}
+
+/* ===== Responsive: pe mobil arătăm iconul (aparitie cu animațiile de mai sus) ===== */
+@media (max-width: 768px) {
+  .hamburger { display: block; }
+}

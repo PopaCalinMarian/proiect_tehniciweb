@@ -1,0 +1,23 @@
+{
+  "name": "tehnici_web",
+  "version": "1.0.0",
+  "description": "Proiectul lui Calin Popa la disciplina Tehnici Web",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm run dev"
+  },
+  "keywords": [
+    "bazaar",
+    "items",
+    "web",
+    "online",
+    "store",
+    "shop"
+  ],
+  "author": "Calin Popa",
+  "license": "ISC",
+  "dependencies": {
+    "ejs": "^3.1.10",
+    "express": "^5.1.0"
+  }
+}
