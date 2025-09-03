@@ -1,5 +1,6 @@
 const exp = require('express');
 const path = require("path");
+const { initErori, afisareEroare, randarePagina } = require("./erori");
 
 const app = exp();
 
@@ -9,6 +10,9 @@ app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 
 app.use("/resurse", exp.static(path.join(__dirname, "resurse")));
+
+//incarcare erori json + imagini
+initErori();
 
 //4.18 incarcare favicon
 app.get("/favicon.ico", (req, res) => {
@@ -28,21 +32,15 @@ app.use((req, res, next) => {
 
 //functia de la 4.10
 function randarePagina(res, view, data = {}) {
-  res.render(view, data, (err, html) => {
+  const locals = { ...res.locals, ...data };
+  res.render(view, locals, (err, html) => {
     if (err) {
-      const msg = String(err && err.message || "");
-      // 1) pagina nu există -> 404
+      const msg = String(err?.message || "");
       if (msg.startsWith("Failed to lookup view")) {
-        return res.status(404).render("pagini/404", { titlu: "Eroare 404" });
+        return afisareEroare(res, 404);     // din erori.json
       }
-      // 2) alt tip de eroare -> 500 (generic)
-      console.error("Eroare randare:", err);
-      return res.status(500).render("pagini/eroare", {
-        titlu: "Eroare server",
-        mesaj: msg
-      });
+      return afisareEroare(res, 500, null, msg); // 500 generic (override text)
     }
-    // 3) fără erori -> trimite rezultatul randării
     res.send(html);
   });
 }

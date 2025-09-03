@@ -83,3 +83,11 @@ function afisareEroare(res, identificator, titlu, text, imagine) {
     imagine: er.imagine
   });
 }
+
+//pregatit pt export
+module.exports = {
+  obGlobal,
+  initErori,    
+  afisareEroare,
+  randarePagina
+};
