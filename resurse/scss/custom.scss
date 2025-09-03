@@ -1,0 +1,73 @@
+//culori schema cromatica
+$brand-orange:#FA6D0E;
+$brand-red:#E01406;
+$brand-black:#000000;
+$brand-white:#FFFFFF;
+$brand-green:#0CE0AB;
+
+//culorile temei pt bootstrap
+$primary: $brand-orange;
+$secondary: $brand-red;
+
+//culoare text pt tot
+$body-color: #FFFFFF;
+
+//culor butoane default
+$btn-color: #464040; 
+$btn-primary-color: $btn-color;
+$btn-secondary-color: #6c6262;
+//linkuri
+$link-color: $brand-red;
+
+//breakpoint-uri dimensiune ecran
+$grid-breakpoints: (
+  xs: 0,
+  sm: 576px,   // default
+  md: 860px,   // schimbat (implicit era 768px)
+  lg: 1180px,  // schimbat (implicit era 992px)
+  xl: 1400px,  // default
+  xxl: 1600px  // default
+);
+//pt grid-uri puse in clase container
+$container-max-widths: (
+  sm: 540px,
+  md: 800px,
+  lg: 1120px,
+  xl: 1320px,
+  xxl: 1480px
+);
+
+//pt border radius
+$enable-rounded: true;
+$border-radius:    .75rem;   // implicit era .375rem (~6px)
+$border-radius-sm: .5rem;    // implicit era .25rem (~4px)
+$border-radius-lg: 1.25rem;  // implicit era .5rem (~8px)
+
+// Raze pentru butoane
+$btn-border-radius:    $border-radius;
+$btn-border-radius-sm: $border-radius-sm;
+$btn-border-radius-lg: $border-radius-lg;
+
+// Raze pentru inputuri
+$input-border-radius:    $border-radius;
+$input-border-radius-sm: $border-radius-sm;
+$input-border-radius-lg: $border-radius-lg;
+
+//heading-uri
+$headings-font-weight: 700;
+
+$h1-font-size: 2.75rem;
+$h2-font-size: 2.25rem;
+$h3-font-size: 1.75rem;
+$h4-font-size: 1.4rem;
+$h5-font-size: 1.15rem;
+$h6-font-size: 1rem;
+
+//familie font implicit
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap");
+
+// override Bootstrap
+$font-family-sans-serif: "Inter", "Segoe UI", Roboto, Arial, sans-serif;
+$font-family-base:       $font-family-sans-serif;
+
+

@@ -37,11 +37,11 @@ function initErori(){
     console.error("[initErori] Nu s-a putut citi erori.json:", err.message);
     // fallback minimal ca să nu pice randarea
     obGlobal.obErori = {
-      cale_baza: "/resurse/img/erori",
+      cale_baza: "/resurse/erori",
       eroare_default: {
         titlu: "Eroare",
         text: "A apărut o problemă.",
-        imagine: "/resurse/img/erori/default.png"
+        imagine: "/resurse/erori/default.jpg"
       },
       info_erori: []
     };
@@ -54,7 +54,7 @@ function afisareEroare(res, identificator, titlu, text, imagine) {
 
   // 1) pornim de la default
   let er = ob.eroare_default ? { ...ob.eroare_default, status: false } : {
-    titlu: "Eroare", text: "A apărut o problemă.", imagine: baza ? `${baza}/default.png` : "/resurse/img/erori/default.png", status: false
+    titlu: "Eroare", text: "A apărut o problemă.", imagine: baza ? `${baza}/default.jpg` : "/resurse/erori/default.jpg", status: false
   };
 
   // 2) dacă avem identificator și există în info_erori, îl folosim
@@ -88,6 +88,5 @@ function afisareEroare(res, identificator, titlu, text, imagine) {
 module.exports = {
   obGlobal,
   initErori,    
-  afisareEroare,
-  randarePagina
+  afisareEroare
 };

@@ -1,0 +1,53 @@
+<div class="container py-4 theme-dark">
+  <h1 class="mb-3">Demo Bootstrap personalizat</h1>
+  <h2 class="mb-4">Heading-urile sunt mărite + font „Inter”</h2>
+
+  <div class="mb-3">
+    <button class="btn btn-primary me-2">Primary</button>
+    <button class="btn btn-secondary me-2">Secondary</button>
+    <span class="badge bg-primary">Badge</span>
+  </div>
+
+  <div class="alert alert-secondary" role="alert">
+    Alertă secundară — vezi paleta nouă și contrastul pe fundal întunecat.
+  </div>
+
+  <div class="card mt-3" style="max-width: 26rem;">
+    <div class="card-body">
+      <h5 class="card-title">Card cu colțuri rotunjite</h5>
+      <p class="card-text">Radius & culori provin din variabilele SCSS setate în <code>custom.scss</code>.</p>
+      <a class="btn btn-primary">Buton în card</a>
+    </div>
+  </div>
+
+  <hr class="my-4">
+
+  <p class="mb-2">Testează breakpoints (md=860px, lg=1180px):</p>
+  <div class="row g-2">
+    <div class="col-sm-6 col-md-4 col-lg-3">
+      <div class="p-3 bg-primary text-white rounded">Col A</div>
+    </div>
+    <div class="col-sm-6 col-md-4 col-lg-3">
+      <div class="p-3 bg-secondary text-white rounded">Col B</div>
+    </div>
+    <div class="col-sm-6 col-md-4 col-lg-3">
+      <div class="p-3 bg-success text-white rounded">Col C</div>
+    </div>
+    <div class="col-sm-6 col-md-4 col-lg-3">
+      <div class="p-3 bg-danger text-white rounded">Col D</div>
+    </div>
+  </div>
+
+  <div class="mt-4">
+    <button id="switchTheme" class="btn btn-outline-light btn-sm">Schimbă tema (dark/carbon)</button>
+  </div>
+</div>
+
+<script>
+  // mic toggle între cele două teme definite în custom.scss
+  document.getElementById("switchTheme")?.addEventListener("click", () => {
+    const root = document.querySelector(".container");
+    root.classList.toggle("theme-carbon");
+    root.classList.toggle("theme-dark");
+  });
+</script>
