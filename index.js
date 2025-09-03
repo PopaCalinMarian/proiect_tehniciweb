@@ -82,10 +82,10 @@ function gestioneazaScss() {
   });
 }
 
-const vect_foldere = ["temp", "backup"]; // sau ["temp", "temp1"]
+const vect_foldere = ["temp", "backup"]; 
 
 for (const nume of vect_foldere) {
-  const caleAbs = path.join(__dirname, nume); // folosește mereu path.join
+  const caleAbs = path.join(__dirname, nume); 
   try {
     if (!fs.existsSync(caleAbs)) {
       fs.mkdirSync(caleAbs, { recursive: true });
@@ -105,21 +105,18 @@ const port = 8080;
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 
-app.get(/^\/resurse(\/.*)?$/, (req, res, next) => {
-  const p = req.path;
-  const endsWithSlash = p.endsWith("/");
-  const hasExt = path.extname(p) !== "";   // are extensie? ex: .css, .png
-  if (endsWithSlash || !hasExt) {
-    return afisareEroare(res, 403);        // din erori.json (text + imagine)
-  }
-  next();
-});
-app.use("/resurse", exp.static(path.join(__dirname, "resurse")));
-
 //incarcare erori json + imagini
 initErori();
 
-app.get(/\.ejs$/i, (req, res) => {
+app.get("/resurse/*", (req, res, next) => {
+  const p = req.path;
+  if (!path.extname(p)) {
+    return afisareEroare(res, 403);
+  }
+  next();
+});
+
+app.get("*.ejs", (req, res) => {
   afisareEroare(res, 400);   // 400 din erori.json
 });
 
@@ -160,6 +157,10 @@ app.get(["/", "/index", "/home"], (req, res) => {
 
 app.get("/demo-bootstrap", (req, res) => {
   randarePagina(res, "pagini/demo-bootstrap", { titlu: "Demo Bootstrap" });
+});
+
+app.get("/despre", (req, res) => {
+  randarePagina(res, "pagini/despre", { titlu: "Items Bazaar | Despre" });
 });
 
 app.get("/:pagina", (req, res) => {
