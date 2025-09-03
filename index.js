@@ -3,7 +3,7 @@ const fs   = require("fs");
 const exp  = require("express");
 const path = require("path");
 const sass = require("sass");
-const { initErori, afisareEroare } = require("./erori");
+const { initErori, afisareEroare} = require("./erori");
 
 // --- obGlobal ---
 global.obGlobal = {
@@ -11,6 +11,8 @@ global.obGlobal = {
   folderCss : path.join(__dirname, "resurse", "css"),
   obErori   : null
 };
+
+gestioneazaScss();
 
 // --- utilitar: compileaza un singur fisier (cu backup) ---
 function compileazaScss(caleScss, caleCss) {
@@ -34,7 +36,7 @@ function compileazaScss(caleScss, caleCss) {
       catch (e) { console.error("Eroare backup CSS:", e); }
     }
 
-    const rez = sass.compile(caleScss, { style: "compressed" });
+    const rez = sass.compile(caleScss, { style: "compressed", loadPaths: [path.join(__dirname, "node_modules"), obGlobal.folderScss] });
     fs.mkdirSync(path.dirname(caleCss), { recursive: true }); // în caz că e subfolder
     fs.writeFileSync(caleCss, rez.css);
     console.log(`Compilat SCSS: ${caleScss} → ${caleCss}`);
